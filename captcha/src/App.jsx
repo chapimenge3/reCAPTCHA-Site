@@ -163,7 +163,7 @@ function App() {
                 ) : null}
                 <input type="hidden" id="response" name="response" value="" />
                 <br />
-                {loading ? (
+                {!loading ? (
                   <button
                     type="submit"
                     id="captcha-submit"
@@ -174,7 +174,7 @@ function App() {
                   </button>
                 ) : (
                   <div class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
+                    <span class="sr-only"></span>
                   </div>
                 )}
               </form>
