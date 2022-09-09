@@ -13,6 +13,7 @@ function App() {
   const [code, setCode] = useState("");
   const [response, setResponse] = useState(null);
   const [showCaptcha, setShowCaptcha] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const verifyCapcha = (response) => {
     if (response) {
@@ -27,6 +28,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     const backendUrl = "https://1f4a-196-188-33-69.eu.ngrok.io/verify-captha";
 
     fetch(backendUrl, {
@@ -40,13 +42,16 @@ function App() {
       .then((data) => {
         if (data.success) {
           alert("You are a human!");
+          setLoading(false);
         } else {
           const message = data.message || "Something went wrong!";
           setError(message);
+          setLoading(false);
         }
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false);
       });
   };
 
@@ -158,14 +163,20 @@ function App() {
                 ) : null}
                 <input type="hidden" id="response" name="response" value="" />
                 <br />
-                <button
-                  type="submit"
-                  id="captcha-submit"
-                  className="btn btn-primary"
-                  disabled={disableButton}
-                >
-                  Verify
-                </button>
+                {loading ? (
+                  <button
+                    type="submit"
+                    id="captcha-submit"
+                    className="btn btn-primary"
+                    disabled={disableButton}
+                  >
+                    Verify
+                  </button>
+                ) : (
+                  <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                )}
               </form>
             </div>
             <div id="captcha-error">
@@ -197,7 +208,7 @@ function App() {
       <div className="container">
         <footer className="py-3 my-4">
           <p className="text-center text-muted">
-            &copy; 2022 recaptcha telegram bot{" "}
+            &copy; 2022 recaptcha telegram bot. All rights reserved. Chapi Menge
           </p>
         </footer>
       </div>
