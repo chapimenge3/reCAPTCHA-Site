@@ -42,7 +42,7 @@ function App() {
           alert("You are a human!");
         } else {
           const message = data.message || "Something went wrong!";
-          alert(message);
+          setError(message);
         }
       })
       .catch((err) => {
