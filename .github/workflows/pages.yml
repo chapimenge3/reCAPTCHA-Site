@@ -32,11 +32,24 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup Pages
         uses: actions/configure-pages@v2
+      
+      - name: Build with vite
+        run: |
+          cd captcha
+          echo "Installing dependencies..."
+          npm install
+          echo "Building..."
+          npm run build
+          echo "Deploying..."
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          # Upload entire repository
-          path: '.'
+          # upload only the dist folder
+          path: 'captcha/dist'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
+      
+      - name: Log page URL
+        run: echo ${{ steps.deployment.outputs.page_url }}
