@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
+import axios from "axios";
 
 const columnstyle = {
   "@media (minWidth: 600px)": {
@@ -29,34 +30,35 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    const backendUrl = "https://1f4a-196-188-33-69.eu.ngrok.io/verify-captha";
+    const backendUrl = "https://tg-bot.deta.dev/verify-captha";
 
-    fetch(backendUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ response, code }),
-    })
-      .then((res) => res.json())
+    axios
+      .post(backendUrl, JSON.stringify({ response, code }), {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => res.data)
       .then((data) => {
-        if (data.success) {
-          alert("You are a human!");
+        if (data.status == 'ok') {
+          window.Telegram.WebApp.sendData("You proved that you are human 😜");
           setLoading(false);
+          window.Telegram.WebApp.close();
         } else {
           const message = data.message || "Something went wrong!";
           setError(message);
           setLoading(false);
+          alert(message);
         }
       })
       .catch((err) => {
         console.log(err);
         setLoading(false);
+        alert("Network error!");
       });
   };
 
   useEffect(() => {
-    // get url params
     const urlParams = new URLSearchParams(window.location.search);
     console.log(urlParams);
     const code = urlParams.get("code");
@@ -173,8 +175,8 @@ function App() {
                     Verify
                   </button>
                 ) : (
-                  <div class="spinner-border" role="status">
-                    <span class="sr-only"></span>
+                  <div className="spinner-border" role="status">
+                    <span className="sr-only"></span>
                   </div>
                 )}
               </form>
