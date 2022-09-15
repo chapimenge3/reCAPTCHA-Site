@@ -30,7 +30,7 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    const backendUrl = "https://ccb7-197-156-103-205.eu.ngrok.io/verify-captha";
+    const backendUrl = "https://tg-bot.deta.dev/verify-captha";
 
     axios
       .post(backendUrl, JSON.stringify({ response, code }), {
