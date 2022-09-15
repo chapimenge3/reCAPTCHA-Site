@@ -1,0 +1,20 @@
+# Netlify configration
+
+[build]
+
+    base = "captcha"
+    
+    publish = "dist/"
+
+    command = "npm run build"
+
+    # for react-route redirect
+
+    [[redirects]]
+
+        from = "/*"
+
+        to = "/index.html"
+
+        status = 200
+    
