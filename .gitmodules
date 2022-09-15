@@ -1,0 +1,3 @@
+[submodule "recaptha-backend-bot"]
+	path = recaptha-backend-bot
+	url = https://github.com/chapimenge3/recaptha-backend-bot.git
