@@ -30,7 +30,7 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    const backendUrl = "https://re-captcha-bot.vercel.app/";
+    const backendUrl = "https://re-captcha-bot.vercel.app/verify-captha";
 
     axios
       .post(backendUrl, JSON.stringify({ response, code }), {
