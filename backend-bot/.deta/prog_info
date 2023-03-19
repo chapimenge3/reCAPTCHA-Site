@@ -1,0 +1,1 @@
+{"id":"e90d4376-acc7-4d58-854f-9bb2d45eb10a","space":31540,"runtime":"python3.9","name":"backend-bot","path":"8hckk5","project":"a0rohm99","account":"144798365827","region":"eu-central-1","deps":["fastapi==0.81.0","httpx","python-dotenv"],"envs":["CAPTCHA_URL","BOT_WEBHOOK_SECRET","DETA_PROJECT_KEY","BOT_TOKEN"],"public":false,"log_level":"off","cron":""}

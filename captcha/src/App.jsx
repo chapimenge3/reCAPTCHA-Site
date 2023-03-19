@@ -30,7 +30,7 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    const backendUrl = "https://tg-bot.deta.dev/verify-captha";
+    const backendUrl = "https://re-captcha-bot.vercel.app/";
 
     axios
       .post(backendUrl, JSON.stringify({ response, code }), {
